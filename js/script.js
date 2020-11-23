@@ -11,32 +11,45 @@ function writeInput(){
 
   var number = document.querySelector('#number');
   number.value = rangeNumber;
-  console.log(rangeNumber);
   var numberWritten = document.querySelector('#numberWritten');
 
   var numero = parseInt(rangeNumber);
-  var auxiliar1 =   ["Zero", "Um", "Dois", "Três", "Quatro", "Cinco", "Seis", "Sete", "Oito", "Nove", "Dez", "Onze", "Doze", "Treze", "Quatorze", "Quinze", "Dezesseis", "Dezessete", "Dezoito", "Dezenove"];
-  var auxiliar2 = ["Dez", "Vinte", "Trinta", "Quarenta", "Cinquenta", "Sessenta", "Setenta", "Oitenta", "Noventa"];
-  var auxiliar3 = ["Cento", "Duzentos", "Trezentos", "Quatrocentos", "Quinhentos", "Seiscentos", "Setessentos", "Oitossentos", "Novessentos"];
+  var unidade =   ["Zero", "Um", "Dois", "Três", "Quatro", "Cinco", "Seis", "Sete", "Oito", "Nove", "Dez", "Onze", "Doze", "Treze", "Quatorze", "Quinze", "Dezesseis", "Dezessete", "Dezoito", "Dezenove"];
+  var dezena = ["Dez", "Vinte", "Trinta", "Quarenta", "Cinquenta", "Sessenta", "Setenta", "Oitenta", "Noventa"];
+  var centena = ["Cento", "Duzentos", "Trezentos", "Quatrocentos", "Quinhentos", "Seiscentos", "Setessentos", "Oitossentos", "Novessentos"];
   var retorno = "";
   
     if (numero < 20){
-    retorno = auxiliar1[numero];
-    } else {
-    var temp = numero.toString().split('');
-    var primeiro_numero = temp[0];
-    var segundo_numero = temp[1];
-    retorno = auxiliar2[primeiro_numero-1] 
-    if (segundo_numero > 0){
-    retorno += " e " + auxiliar1[primeiro_numero];
+    retorno = unidade[numero];
+    }else if(numero > 19 && numero < 100){ 
+      var temp = numero.toString().split('');
+      var n1 = temp[0]; 
+      var n2 = temp[1];
+      retorno = dezena[temp[0]-1];
+      if(n2 > 0 && numero < 100){
+        retorno = retorno + " e " + unidade[n2];
+      }
+    }else if(numero >= 100) {
+      var temp = numero.toString().split('');
+      var n1 = temp[0]; 
+      var n2 = temp[1];
+      var n3 = temp[2];
+      retorno = centena[temp[0]-1];
+      if(n2>0 && n3 === 0){
+        retorno = retorno + " e " + dezena[n2-1];
+      }else{
+        retorno = retorno + " e " + dezena[n2-1] + " e " + unidade[n3];
+      }
     }
-    
-    }
-    
-    
+
+
+
+    console.log(n1);
+      console.log(n2);
+      console.log(temp[2]);
+      console.log(retorno);
   
   numberWritten.value = retorno;
 
+
 }
-
-
