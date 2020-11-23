@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Números por extenso</title>
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Números por extenso</h1>
+    <form> 
+      Escolha um número entre 0 e 999:
+      <input onchange="writeInput" id="range" type="range" value="500" min="0" max="999">
+      <div>
+        Nº atual:
+        <input id="number" type="text">
+      </div>
+      <div>
+        Nº extenso:
+      <input id="numberWritten"type="text">
+      </div>
+      
+    </form>
+</div>
+</body>
+<script src="./js/script.js"></script>
+</html>
