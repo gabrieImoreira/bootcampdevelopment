@@ -3,7 +3,6 @@ window.addEventListener('load',start);
 function start() {
   var rangeNumber = document.querySelector('#range');
   rangeNumber.addEventListener('change', writeInput)
-
 }
 
 function writeInput(){
