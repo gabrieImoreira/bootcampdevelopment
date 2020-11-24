@@ -3,3 +3,4 @@
 - Programa desenvolvido utilizando HTML, CSS e JavaScript puro, para mostrar
 números por extenso.
 
+Abaixo, a apresentação do programa:
