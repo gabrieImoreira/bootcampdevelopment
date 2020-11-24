@@ -1,0 +1,12 @@
+div {
+  padding: 15px;
+}
+.container {
+  text-align: center;
+}
+#range {
+  width: 1050px;
+  height: 25px;
+  border-radius: 50%;
+  background: blue;
+}
