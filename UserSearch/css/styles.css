@@ -1,0 +1,38 @@
+body {
+  padding: 10px;
+  text-align: center;
+}
+
+.search {
+  display: flex;
+  align-items: center;
+}
+.input {
+  width: 300px;
+}
+.search-container {
+  display: flex;
+  align-items: center;
+}
+img {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+  margin-left: 10px;
+
+  border-radius: 50%;
+}
+
+.add {
+  border-radius: 50%;
+  background-color: darkgreen;
+  color: white;
+  font-weight: bold;
+}
+
+.user-list {
+  padding: 5px;
+  border: 1px solid grey;
+  border-radius: 10px;
+  margin-right: 10px;
+}
