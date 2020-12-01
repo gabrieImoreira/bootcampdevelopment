@@ -41,14 +41,11 @@ function writeInput(){
       }
     }
 
-
-
     console.log(n1);
       console.log(n2);
       console.log(temp[2]);
       console.log(retorno);
   
   numberWritten.value = retorno;
-
-
+ 
 }
