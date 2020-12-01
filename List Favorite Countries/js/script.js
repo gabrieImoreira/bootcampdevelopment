@@ -40,6 +40,7 @@ function start() {
         id: numericCode,
         name: translations.pt,
         population,
+        formattedPopulation: formatNumber(population),
         flag,
       };
     });
@@ -57,12 +58,12 @@ function start() {
     let countriesHTML = '<div>';
 
     allCountries.forEach(country => {
-      const { name, flag, id, population } = country;
+      const { name, flag, id, population, formattedPopulation } = country;
 
       const countryHTML =`
       <div class='country'>
         <div>
-        <a id="${id}"class="waves-effect waves-light btn">-</a>
+        <a id="${id}"class="waves-effect waves-light btn">+</a>
         </div>
         <div>
         <img src="${flag}" alt="${name}">
@@ -70,7 +71,7 @@ function start() {
         <div>
           <ul>
             <li>${name}</li>
-            <li>${population}</li>
+            <li>${formattedPopulation}</li>
           </ul>
 
         </div>
@@ -87,12 +88,12 @@ function start() {
     let favoritesHTML= '<div>'
 
     favoriteCountries.forEach(country => {
-      const { name, flag, id, population} = country;
+      const { name, flag, id, population, formattedPopulation } = country;
 
       const favoriteCountryHTML =`
       <div class='country'>
         <div>
-        <a id="${id}"class="waves-effect waves-light btn red darken-4">+</a>
+        <a id="${id}"class="waves-effect waves-light btn red darken-4">-</a>
         </div>
         <div>
         <img src="${flag}" alt="${name}">
@@ -100,7 +101,7 @@ function start() {
         <div>
           <ul>
             <li>${name}</li>
-            <li>${population}</li>
+            <li>${formattedPopulation}</li>
           </ul>
 
         </div>
@@ -129,8 +130,50 @@ function start() {
     }, 0);
 
     
-  totalPopulationList.textContent = totalPopulation;
-  totalPopulationFavorites.textContent = totalFavorites;
+  totalPopulationList.textContent = formatNumber(totalPopulation);
+  totalPopulationFavorites.textContent = formatNumber(totalFavorites);
 
   }
-  function handleCountryButtons(){}
+  function handleCountryButtons(){
+    const countryButtons = Array.from(tabCountries.querySelectorAll('.btn'));
+    const favoriteButtons = Array.from(tabFavorites.querySelectorAll('.btn'));
+
+    countryButtons.forEach(button =>{
+      button.addEventListener('click',() => addToFavorites(button.id));
+    });
+
+    favoriteButtons.forEach(button =>{
+      button.addEventListener('click',() => removeFromFavorites(button.id));
+    });
+  }
+
+function addToFavorites(id){
+  const countryToAdd = allCountries.find(country => country.id === id);
+  
+  favoriteCountries = [...favoriteCountries, countryToAdd]; //add to favorite Countries list
+  
+  favoriteCountries.sort((a,b) => {
+    return a.name.localeCompare(b.name) //alphabetical order
+  });
+
+  allCountries = allCountries.filter(country => country.id !== id);
+
+  render();
+}
+function removeFromFavorites(id){
+  const countryToRemove = favoriteCountries.find(country => country.id === id);
+  
+  allCountries = [...allCountries, countryToRemove]; //add to favorite Countries list
+  
+  allCountries.sort((a,b) => {
+    return a.name.localeCompare(b.name) //alphabetical order
+  });
+
+  favoriteCountries = favoriteCountries.filter(country => country.id !== id);
+
+  render();
+}
+
+function formatNumber(number){
+  return numberFormat.format(number);
+}
