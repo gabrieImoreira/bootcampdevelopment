@@ -11,12 +11,18 @@
   <h1>Pesquisa de usuários</h1>
   
   <div class="search">
-    <input class="input" type="text" placeholder="Busca">
-    <input type="button" value="BUSCAR">
+    <input id="input" class="input" type="text" placeholder="Busca">
+    <input id="button" type="button" value="BUSCAR">
   </div>
   <div class="search-container">
-    <div class="user-list">Nenhum usuário</div>
-    <div class="user-list">Nada a ser mostrado</div>
+    <div class="user-list">
+      <span id="totalUsersList">Nenhum usuário a ser mostrado</span>
+      <div id="tabUsers"></div>
+    </div>
+    <div class="user-list">
+      <span id="informationUsers">Nada ser exibido</span> 
+    </div>
   </div>
 </body>
+  <script src="./js/script.js"></script>
 </html>
