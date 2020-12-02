@@ -4,9 +4,11 @@
 let tabUsers = null;
 let informationUsers = null;
 let allUsers =[];
+let listUsers=[];
 let input = document.querySelector('#input');
 let button = document.querySelector('#button');
-
+let user = null;
+let qnt = 0;
 window.addEventListener('load', start);
 
 function start(){
@@ -53,17 +55,35 @@ function activateInput(){ //comecar c o input ativado
       picture: picture.thumbnail,
     }
   })
+  console.log(allUsers[29].name);
   render();
 }
 
 function render(){
 }
+
 function QueryUsers(){
-  let usersHTML="<div>"
+  // input = input.value.toLowerCase();
+  // console.log(input);
 
-  allUsers.forEach(user =>{
+  qnt = listUsers.length;
+  let usersHTML=
+      `<div>  
+        <div>
+        ${qnt} usuário(s) encontrado(s)
+        </div>`;
+
+  listUsers = allUsers.filter(user =>{
+    return user.name.toLowerCase().indexOf(input.value.toLowerCase()) > -1
+  });
+  
+  listUsers.forEach(user =>{
     const { gender: gender, age, name, picture} = user; 
-
+    
+    listUsers.sort((a,b) => {
+      return a.name.localeCompare(b.name) //alphabetical order
+    });
+    
     const userHTML= `
       <div class="user">
         <div>
