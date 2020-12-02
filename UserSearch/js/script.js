@@ -16,6 +16,7 @@ function start(){
   
   preventInputSubmit();
   activateInput();
+  fetchCountries()
 }
 function preventInputSubmit(){ //n recarregar a pagina
 
@@ -39,25 +40,44 @@ function activateInput(){ //comecar c o input ativado
   button.addEventListener('click', buttonSearch); //search by click button BUSCAR
 }
 
-async function fetchCountries(){
+ async function fetchCountries(){
   const res = await fetch('https://randomuser.me/api/?seed=javascript&results=100&nat=BR&noinfo');
   const json = await res.json();
+  allUsers = json.results.map( user => {
+    const { gender: gender, dob, name, picture} = user; 
 
-  allUsers = json.map(country => {
-    const {numericCode, translations, population, flag} = country;
-
-    return {
-      id: numericCode,
-      name: translations.pt,
-      population,
-      formattedPopulation: formatNumber(population),
-      flag,
-    };
-  });
+    return{
+      gender,
+      age: dob.age,
+      name: name.first +' '+ name.last,
+      picture: picture.thumbnail,
+    }
+  })
   render();
 }
-}
 
+function render(){
+}
 function QueryUsers(){
-  console.log(input.value);
+  let usersHTML="<div>"
+
+  allUsers.forEach(user =>{
+    const { gender: gender, age, name, picture} = user; 
+
+    const userHTML= `
+      <div class="user">
+        <div>
+        <img src="${picture}" alt="${name}">
+        </div>
+        <div>
+        ${name}, ${age} anos 
+        </div>
+      </div>
+    
+    `;
+
+    usersHTML += userHTML;
+  });
+
+  tabUsers.innerHTML = usersHTML;
 }

@@ -29,7 +29,11 @@ img {
   color: white;
   font-weight: bold;
 }
-
+.user {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
 .user-list {
   padding: 5px;
   border: 1px solid grey;
