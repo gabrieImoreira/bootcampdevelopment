@@ -2,19 +2,27 @@
  * Estado da aplicação (state)
  */
 let tabUsers = null;
-let informationUsers = null;
+let tabInformationUsers = null;
 let allUsers =[];
 let listUsers=[];
 let input = document.querySelector('#input');
 let button = document.querySelector('#button');
 let user = null;
 let qnt = 0;
+let sumMale =0;
+let sumWomen = 0;
+let sumAges = 0;
+let averageAges = 0;
 window.addEventListener('load', start);
 
 function start(){
 
   tabUsers = document.querySelector('#tabUsers');
   informationUsers = document.querySelector('#informationUsers');
+  tabInformationUsers = document.querySelector('#tabInformationUsers');
+  totalUsersList = document.querySelector('#totalUsersList');
+  
+
   
   preventInputSubmit();
   activateInput();
@@ -54,8 +62,7 @@ function activateInput(){ //comecar c o input ativado
       name: name.first +' '+ name.last,
       picture: picture.thumbnail,
     }
-  })
-  console.log(allUsers[29].name);
+  });
   render();
 }
 
@@ -63,15 +70,15 @@ function render(){
 }
 
 function QueryUsers(){
-  // input = input.value.toLowerCase();
-  // console.log(input);
 
+function totalUsersList(){
+  
   qnt = listUsers.length;
+  totalUsersList = document.querySelector('#totalUsersList');
+  totalUsersList.textContent = qnt + ' usuário(s) encontrado(s)';
+}
   let usersHTML=
-      `<div>  
-        <div>
-        ${qnt} usuário(s) encontrado(s)
-        </div>`;
+      '<div>' 
 
   listUsers = allUsers.filter(user =>{
     return user.name.toLowerCase().indexOf(input.value.toLowerCase()) > -1
@@ -79,10 +86,6 @@ function QueryUsers(){
   
   listUsers.forEach(user =>{
     const { gender: gender, age, name, picture} = user; 
-    
-    listUsers.sort((a,b) => {
-      return a.name.localeCompare(b.name) //alphabetical order
-    });
     
     const userHTML= `
       <div class="user">
@@ -93,11 +96,55 @@ function QueryUsers(){
         ${name}, ${age} anos 
         </div>
       </div>
-    
     `;
-
     usersHTML += userHTML;
   });
 
   tabUsers.innerHTML = usersHTML;
+  totalUsersList();
+  StatisticUsers();
+  
+  function StatisticUsers(){
+
+    const informationUsers = document.querySelector('#informationUsers');
+    informationUsers.textContent = 'Estatísticas';
+    sumMale = 0;
+    sumWomen = 0;
+    sumAges = 0;
+    averageAges = 0;
+    
+
+    listUsers.forEach(user =>{
+      
+      const { gender: gender, age } = user; 
+        if (gender === "male") {
+            sumMale++;
+        }
+        if (gender === "female") {
+            sumWomen++;
+        }
+        sumAges += age;
+      });
+
+      if (listUsers.length > 0) {
+        averageAges = sumAges/listUsers.length;
+    } else {
+      averageAges = 0;
+    }
+  let informationUsersHTML=
+      '<div>';
+
+      const informationUserHTML= `
+      <div class="user">
+        <ul>
+          <li>Sexo masculino: ${sumMale}</li>
+          <li>Sexo feminino: ${sumWomen}</li>
+          <li>Soma das idades: ${sumAges}</li>
+          <li>Média das idades: ${averageAges}</li>
+        </ul>
+      </div>
+    `;
+    informationUsersHTML += informationUserHTML;
+    tabInformationUsers.innerHTML = informationUsersHTML;
+  }
 }
