@@ -128,6 +128,7 @@ function totalUsersList(){
 
       if (listUsers.length > 0) {
         averageAges = sumAges/listUsers.length;
+        
     } else {
       averageAges = 0;
     }
@@ -137,10 +138,10 @@ function totalUsersList(){
       const informationUserHTML= `
       <div class="user">
         <ul>
-          <li>Sexo masculino: ${sumMale}</li>
-          <li>Sexo feminino: ${sumWomen}</li>
-          <li>Soma das idades: ${sumAges}</li>
-          <li>Média das idades: ${averageAges}</li>
+          <li>Sexo masculino: <strong>${sumMale}</strong></li>
+          <li>Sexo feminino: <strong>${sumWomen}</strong></li>
+          <li>Soma das idades: <strong>${sumAges}</strong></li>
+          <li>Média das idades: <strong>${averageAges.toFixed(2)}</strong></li>
         </ul>
       </div>
     `;

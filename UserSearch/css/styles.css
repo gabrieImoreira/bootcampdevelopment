@@ -12,22 +12,13 @@ body {
 }
 .search-container {
   display: flex;
-  align-items: center;
 }
 img {
   width: 50px;
   height: 50px;
   margin-right: 10px;
   margin-left: 10px;
-
   border-radius: 50%;
-}
-
-.add {
-  border-radius: 50%;
-  background-color: darkgreen;
-  color: white;
-  font-weight: bold;
 }
 .user {
   display: flex;
@@ -35,8 +26,12 @@ img {
   align-items: center;
 }
 .user-list {
-  padding: 5px;
-  border: 1px solid grey;
-  border-radius: 10px;
-  margin-right: 10px;
+  width: 50%;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 5px;
+}
+#button {
+  margin: 1em;
 }
