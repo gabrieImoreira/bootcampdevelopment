@@ -5,7 +5,8 @@ init();
 
 async function init(){
 filterStates();
-getBiggestStates();
+getBiggestStates('more');
+getBiggestStates('less');
 }
 
 async function filterStates(){
@@ -25,7 +26,7 @@ async function getCitiesCount(uf){
   return citiesByState.length;
 }
 
-async function getBiggestStates(){
+async function getBiggestStates(condition){
   const jsonStates = JSON.parse(await fs.readFile("Estados.json"));
   const list = [];
 
@@ -38,6 +39,13 @@ async function getBiggestStates(){
     if (a.count < b.count) {return 1};
     if (a.count > b.count) {return -1}
   });
-  let a = list.slice(0,5)
-  console.log(a);
+  //console.log(list);
+  
+  if(condition === 'more'){
+    let results = list.slice(0,5);
+    console.log(results);
+  } else if(condition == 'less') {
+    let results = list.slice(-5);
+    console.log(results);
+  }
 }
