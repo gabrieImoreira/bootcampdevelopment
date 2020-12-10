@@ -1,22 +1,15 @@
 import {promises as fs} from "fs";
-
-let allStates = [];
-
+let state = null;
 filterStates();
+
 async function filterStates(){
   const jsonStates = JSON.parse(await fs.readFile("Estados.json"));
+  const jsonCities = JSON.parse(await fs.readFile("Cidades.json"));
   
-  const obj = 2;
-  jsonStates.forEach(state =>{
-    const {ID, Sigla, Nome} = state;
-    fs.writeFile("./States/"+Sigla+".json", JSON.stringify(obj));
-  });
-}
-//
-async function StatesAndCities(){
-  try{
-
-  }catch{
-
+  for (state of jsonStates){
+    const stateCities = jsonCities.filter((city => city.Estado === state.ID));
+    fs.writeFile(`./states/${state.Sigla}.json`, JSON.stringify(stateCities));
   }
 }
+  
+
