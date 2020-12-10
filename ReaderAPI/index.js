@@ -32,7 +32,12 @@ async function getBiggestStates(){
   for(state of jsonStates) {
     const count = await getCitiesCount(state.Sigla);
     list.push({UF: state.Sigla, count});
-    
   }
-  console.log(list);
+  
+  list.sort((a,b) => {
+    if (a.count < b.count) {return 1};
+    if (a.count > b.count) {return -1}
+  });
+  let a = list.slice(0,5)
+  console.log(a);
 }
