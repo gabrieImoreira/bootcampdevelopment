@@ -5,8 +5,9 @@ init();
 
 async function init(){
 filterStates();
-getBiggestStates('more');
-getBiggestStates('less');
+getSizeCitiesByStates('more');
+await getSizeCitiesByStates('less');
+getSmallerCityName('AC');
 }
 
 async function filterStates(){
@@ -26,7 +27,7 @@ async function getCitiesCount(uf){
   return citiesByState.length;
 }
 
-async function getBiggestStates(condition){
+async function getSizeCitiesByStates(condition){
   const jsonStates = JSON.parse(await fs.readFile("Estados.json"));
   const list = [];
 
@@ -49,3 +50,52 @@ async function getBiggestStates(condition){
     console.log(results);
   }
 }
+
+/* async function getSizeCities(){
+  const jsonStates = JSON.parse(await fs.readFile("Estados.json"));
+  const list = [];
+
+  for(state of jsonStates){
+    let city;
+    city = await getBiggerName
+  }
+} */
+
+async function getBiggerCityName(uf){
+  const cities = JSON.parse(await fs.readFile(`./states/${uf}.json`));
+
+  let result;
+
+  cities.forEach((city) => {
+    if (!result) result = city;
+    else if (city.Nome.length > result.Nome.length) result = city;
+    else if (
+      city.Nome.length === result.Nome.length &&
+      city.Nome.toLowerCase() < result.Nome.toLowerCase()
+    )
+      result = city;
+  });
+  console.log(result);
+  return result;
+  
+}
+
+async function getSmallerCityName(uf){
+  const cities = JSON.parse(await fs.readFile(`./states/${uf}.json`));
+
+  let result;
+
+  cities.forEach((city) => {
+    if (!result) result = city;
+    else if (city.Nome.length > result.Nome.length) result = city;
+    else if (
+      city.Nome.length === result.Nome.length &&
+      city.Nome.toLowerCase() < result.Nome.toLowerCase()
+    )
+      result = city;
+  });
+  console.log(result);
+  return result;
+  
+}
+
