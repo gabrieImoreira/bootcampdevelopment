@@ -6,9 +6,11 @@ init();
 async function init(){
 filterStates();
 getSizeCitiesByStates('more');
-await getSizeCitiesByStates('less');
-await getSizeCities(true);
-getSizeCities(false);
+await getSizeCitiesByStates('less'); //using name
+await getSizeCities(true); //using boolean logic
+await getSizeCities(false); //using boolean logic
+getBiggerOrSmallerCityName(true); //using boolean logic
+getBiggerOrSmallerCityName(false); //using boolean logic
 }
 
 async function filterStates(){
@@ -55,8 +57,6 @@ async function getSizeCitiesByStates(condition){
 async function getSizeCities(bigger){
   const jsonStates = JSON.parse(await fs.readFile("Estados.json"));
   const result = [];
-  console.log('hi');
-
   for(state of jsonStates){
     let city;
 
@@ -107,3 +107,35 @@ async function getSmallerCityName(uf){
   
 }
 
+async function getBiggerOrSmallerCityName(bigger){
+  const states = JSON.parse(await fs.readFile('./Estados.json'));
+  const list = [];
+  for (state of states) {
+    let city;
+    if (bigger) {
+      city = await getBiggerCityName(state.Sigla);
+    } else {
+      city = await getSmallerCityName(state.Sigla);
+    }
+    list.push({ name: city.Nome, uf: state.Sigla });
+  }
+  
+  const result = list.reduce((prev, current) => {
+    if (bigger) {
+      if (prev.name.length > current.name.length) return prev;
+      else if (prev.name.length < current.name.length) return current;
+      else
+        return prev.name.toLowerCase() < current.name.toLowerCase()
+          ? prev
+          : current;
+    } else {
+      if (prev.name.length < current.name.length) return prev;
+      else if (prev.name.length > current.name.length) return current;
+      else
+        return prev.name.toLowerCase() < current.name.toLowerCase()
+          ? prev
+          : current;
+    }
+  });
+  console.log(result.name + ' - ' + result.uf);
+}
