@@ -1,6 +1,6 @@
 ## Trabalho prático 2
 
--<h2> Desafio proposto: </h2>
+<h2> - Desafio proposto: </h2>
 
 O aluno deverá baixar os arquivos Cidades.json e Estados.json do seguinte link (https://github.com/felipefdl/cidades-estados-brasil-json) e colocá-los dentro do seu projeto. O arquivo Estados.json possui uma listagem com todos os estados do Brasil, cada um representado por um ID. No arquivo Cidades.json estão listadas todas as cidades do Brasil, com seu respectivo estado representando pelo ID fazendo referência ao arquivo Estados.json.
 Os alunos deverão desempenhar as seguintes atividades:
@@ -17,4 +17,3 @@ Observações:
 - Você deve considerar os nomes das cidades da forma que estão no arquivo, mesmo que tenha observações no nome entre parênteses. Exemplo: Cidade X (antiga Cidade Y).
 - Ao rodar o projeto, ele deve executar os métodos em sequência e depois finalizar a execução.
 
-Ok
