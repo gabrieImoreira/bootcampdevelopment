@@ -7,7 +7,8 @@ async function init(){
 filterStates();
 getSizeCitiesByStates('more');
 await getSizeCitiesByStates('less');
-getSmallerCityName('SP');
+await getSizeCities(true);
+getSizeCities(false);
 }
 
 async function filterStates(){
@@ -25,6 +26,7 @@ async function getCitiesCount(uf){
   //let total = citiesByState.length 
   //console.log(total);
   return citiesByState.length;
+  
 }
 
 async function getSizeCitiesByStates(condition){
@@ -40,7 +42,6 @@ async function getSizeCitiesByStates(condition){
     if (a.count < b.count) {return 1};
     if (a.count > b.count) {return -1}
   });
-  //console.log(list);
   
   if(condition === 'more'){
     let results = list.slice(0,5);
@@ -51,15 +52,24 @@ async function getSizeCitiesByStates(condition){
   }
 }
 
-/* async function getSizeCities(){
+async function getSizeCities(bigger){
   const jsonStates = JSON.parse(await fs.readFile("Estados.json"));
-  const list = [];
+  const result = [];
+  console.log('hi');
 
   for(state of jsonStates){
     let city;
-    city = await getBiggerName
+
+    if(bigger){
+    city = await getBiggerCityName(state.Sigla);
+    } else {
+    city = await getSmallerCityName(state.Sigla);
+    }
+
+    result.push(city.Nome + ' - ' + state.Sigla);
   }
-} */
+  console.log(result);
+}
 
 async function getBiggerCityName(uf){
   const cities = JSON.parse(await fs.readFile(`./states/${uf}.json`));
@@ -89,11 +99,10 @@ async function getSmallerCityName(uf){
     else if (city.Nome.length < result.Nome.length) result = city;
     else if (
       city.Nome.length === result.Nome.length &&
-      city.Nome.toLowerCase() > result.Nome.toLowerCase()
+      city.Nome.toLowerCase() < result.Nome.toLowerCase()
     )
       result = city;
   });
-  console.log(result);
   return result;
   
 }
