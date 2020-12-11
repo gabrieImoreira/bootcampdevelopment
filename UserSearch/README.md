@@ -13,3 +13,6 @@ Os alunos deverão desempenhar as seguintes atividades:
 8. No painel da direita, calcular e mostrar algumas estatísticas sobre esses usuários, conforme imagens abaixo.
 
 <h3>Tela inicial da aplicação: </h3>
+
+![image](https://user-images.githubusercontent.com/68259581/101855834-e2918500-3b42-11eb-9867-f4396ad68d86.png)
+
