@@ -7,7 +7,7 @@ async function init(){
 filterStates();
 getSizeCitiesByStates('more');
 await getSizeCitiesByStates('less');
-getSmallerCityName('AC');
+getSmallerCityName('SP');
 }
 
 async function filterStates(){
@@ -75,7 +75,6 @@ async function getBiggerCityName(uf){
     )
       result = city;
   });
-  console.log(result);
   return result;
   
 }
@@ -87,10 +86,10 @@ async function getSmallerCityName(uf){
 
   cities.forEach((city) => {
     if (!result) result = city;
-    else if (city.Nome.length > result.Nome.length) result = city;
+    else if (city.Nome.length < result.Nome.length) result = city;
     else if (
       city.Nome.length === result.Nome.length &&
-      city.Nome.toLowerCase() < result.Nome.toLowerCase()
+      city.Nome.toLowerCase() > result.Nome.toLowerCase()
     )
       result = city;
   });
